@@ -3,6 +3,15 @@
 An R 'Shiny' application to seamlessly create an interactive a catalogue of geospatial data and deploy it online. The interface allows for map and table explorations of the catalogue. Items can be represented as points or areas.
 
 
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-CMD-check](https://github.com/sebastien-plutniak/spatialCatalogueViewer/actions/workflows/r.yml/badge.svg)](https://github.com/sebastien-plutniak/spatialCatalogueViewer/actions/workflows/r.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16809720.svg)](https://doi.org/10.5281/zenodo.16809720)
+[![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/sebastien-plutniak/spatialCatalogueViewer/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/sebastien-plutniak/spatialCatalogueViewer)
+[![r-universe](https://sebastien-plutniak.r-universe.dev/badges/spatialCatalogueViewer)](https://sebastien-plutniak.r-universe.dev/ui#package:spatialCatalogueViewer)
+[![license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.r-project.org/Licenses/GPL-3)
+
+
 # Contents
 
 - [**Installation**](#installation)

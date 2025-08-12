@@ -1,6 +1,6 @@
 export(spatialCatalogueViewer)
 
-importFrom(DT, datatable)
+importFrom(DT, datatable, renderDataTable, dataTableOutput)
 importFrom(leaflet, addCircleMarkers, addLegend, addProviderTiles, addRectangles, clearMarkers, clearMarkerClusters, clearShapes, leaflet, leafletOutput, leafletProxy, markerClusterOptions, pathOptions, popupOptions, providerTileOptions, renderLeaflet, setView)
 importFrom(leaflet.extras, addDrawToolbar)
 import(shiny)
