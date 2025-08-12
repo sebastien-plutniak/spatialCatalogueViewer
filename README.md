@@ -1,6 +1,6 @@
-# spatialCatalogueViewer: A 'Shiny' Tool to Create Interactive Catalogues of Geospatial Data
+# spatialCatalogueViewer: A 'Shiny' Tool to Create Interactive Catalogues for Geospatial Data
 
-An R 'Shiny' application to seamlessly create an interactive a catalogue of geospatial data and deploy it online. The interface allows for map and table explorations of the catalogue. Items can be represented as points or areas.
+An R 'Shiny' application to seamlessly create interactive online catalogues for geospatial data. Items can be represented as points or areas and the interface allows for explorations through a map and a dynamic table featuring a simple search form and optional column filters. 
 
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
