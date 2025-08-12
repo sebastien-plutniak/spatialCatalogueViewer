@@ -1,6 +1,6 @@
-# spatialCatalogueViewer: A 'Shiny' Tool to Create Interactive Catalogues of Georeferenced Data
+# spatialCatalogueViewer: A 'Shiny' Tool to Create Interactive Catalogues of Geospatial Data
 
-An R 'Shiny' application to seamlessly create an interactive a catalogue of georeferenced data and deploy it online. The interface allows for map and table explorations of the catalogue. Items can be georeferenced as points or areas.
+An R 'Shiny' application to seamlessly create an interactive a catalogue of geospatial data and deploy it online. The interface allows for map and table explorations of the catalogue. Items can be represented as points or areas.
 
 
 # Contents
