@@ -1,0 +1,24 @@
+Package: spatialCatalogueViewer
+Type: Package
+Title: A 'Shiny' Tool to Create Interactive Catalogues of Georeferenced Data
+Version: 0.1.0
+Date: 2025-08-12
+Authors@R: person("Sebastien", "Plutniak", email = "sebastien.plutniak@posteo.net", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6674-3806"))
+Author: Sebastien Plutniak [aut, cre] (<https://orcid.org/0000-0002-6674-3806>)
+Maintainer: Sebastien Plutniak <sebastien.plutniak@posteo.net>
+Description: An R 'Shiny' application to seamlessly create an interactive and deploy online a catalogue of georeferenced data. The interface allows for map and table explorations of the catalogue. Items can be georeferenced as points or areas.
+License: GPL-3
+Repository: CRAN
+Encoding: UTF-8
+Imports:
+    DT,
+    leaflet,
+    leaflet.extras,
+    shiny,
+    shinythemes,
+Depends:
+    R (>= 4.1.0)
+URL: https://github.com/sebastien-plutniak/spatialCatalogueViewer
+BugReports: https://github.com/sebastien-plutniak/spatialCatalogueViewer/issues
+
+

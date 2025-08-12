@@ -1,0 +1,9 @@
+.git
+.github
+.gitignore
+.Rhistory
+app.R
+LICENSE.md
+README.md
+^doc$
+^Meta$
