@@ -1,6 +1,6 @@
 # spatialCatalogueViewer: A 'Shiny' Tool to Create Interactive Catalogues of Georeferenced Data
 
-An R 'Shiny' application to seamlessly create an interactive and deploy online a catalogue of georeferenced data. The interface allows for map and table explorations of the catalogue. Items can be georeferenced as points or areas.
+An R 'Shiny' application to seamlessly create an interactive a catalogue of georeferenced data and deploy it online. The interface allows for map and table explorations of the catalogue. Items can be georeferenced as points or areas.
 
 
 # Contents
@@ -33,8 +33,8 @@ remotes::install_github("sebastien-plutniak/spatialCatalogueViewer")
 
 `spatialCatalogueViewer` is used by:
 
-*  [archeoViz Portal](https://analytics.huma-num.fr/archeoviz/home): a catalogue of archaeological datasets exposed with the `archeoViz` application.
-*  [open-archeOcsean](https://analytics.huma-num.fr/Sebastien.Plutniak/open-archeocsean): a catalogue of open-source datasets for the Pacific and Southeast Asia archaeology.
+*  [archeoViz Portal](https://analytics.huma-num.fr/archeoviz/home): a catalogue of archaeological datasets exposed with the `archeoViz` application [see R code](https://github.com/sebastien-plutniak/archeoviz-portal).
+*  [open-archeOcsean](https://analytics.huma-num.fr/Sebastien.Plutniak/open-archeocsean): a catalogue of open-source datasets for the Pacific and Southeast Asia archaeology  [see R code](https://github.com/sebastien-plutniak/open-archeocsean).
 
 
 
