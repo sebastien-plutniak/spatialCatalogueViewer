@@ -47,7 +47,7 @@ app_server <- function(input, output, session) {
                                   column(1),
                                   column(10,  align = "center",
                                          br(),
-                                         DT::dataTableOutput("table",  width="100%"), ##  table output ----
+                                         DT::dataTableOutput("table", width = "100%"), ##  table output ----
                                          br(),
                                          uiOutput("download.table.button"),
                                          br(),br(),
