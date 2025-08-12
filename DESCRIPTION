@@ -11,11 +11,11 @@ License: GPL-3
 Repository: CRAN
 Encoding: UTF-8
 Imports:
-    DT,
     leaflet,
     leaflet.extras,
     shiny,
     shinythemes,
+    DT,
 Depends:
     R (>= 4.1.0)
 URL: https://github.com/sebastien-plutniak/spatialCatalogueViewer

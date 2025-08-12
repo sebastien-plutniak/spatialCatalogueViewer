@@ -7,11 +7,11 @@ app_server <- function(input, output, session) {
     div(HTML(txt))
   })
   
-  # UI: show ares ----
+  # UI: show areas ----
   
   output$show.areas <- renderUI({
     if(getShinyOption("map.show.areas") %in% c(TRUE, FALSE)){
-      checkboxInput("show.areas", "Show data coverage areas.", value = getShinyOption("map.show.areas"))
+      checkboxInput("show.areas.box", "Show data coverage areas.", value = getShinyOption("map.show.areas"))
     }
   })
   
@@ -29,10 +29,14 @@ app_server <- function(input, output, session) {
                            ), #end column
                            column(7, align="left",
                                   HTML(getShinyOption("text.top")),
+                                  textOutput("tmp"),
                                   br(),
                                   leaflet::leafletOutput("map", width="100%", height = getShinyOption("map.height")), ## map  ----
                                   fluidRow(
-                                    column(2, HTML("&thinsp;"), actionLink("reset.map", "Reset map."), style="padding:10px;"),
+                                    column(2, 
+                                           HTML("&thinsp;"),
+                                           actionLink("reset.selections", "Reset selections"), 
+                                           style="padding:10px;"),
                                     column(4, uiOutput("show.areas")),
                                   ),
                                   fluidRow(
@@ -63,7 +67,7 @@ app_server <- function(input, output, session) {
     tab.list <- lapply(seq_len(length(optional.tabs)), function(x)
       tabPanel(names(optional.tabs)[x],
                fluidRow(column(1),
-                        column(7,
+                        column(11,
                                HTML(optional.tabs[[x]])
                                )
                         )
@@ -78,17 +82,15 @@ app_server <- function(input, output, session) {
   data <- getShinyOption("data")
   data$id <- seq_len(nrow(data))
   
-  ## convert longitudes in positive values for mapping purpose ----
-  idx <- which(data$bbox.lon1 < 0 & data$bbox.lon2 < 0)
-  data[idx, ]$bbox.lon1 <- 180 + (180 + data[idx, ]$bbox.lon1)
-  idx <- which(data$bbox.lon2 < 0)
-  data[idx, ]$bbox.lon2 <- 180 + (180 + data[idx, ]$bbox.lon2)
-  data[which(data$lon < 0), ]$lon <- 180 + (180 + data[which(data$lon < 0), ]$lon)
+  ## convert longitudes in the map is centered ----
   
-  ## resource.name.html ----
-  # if(! any(colnames(data) == "resource.name.html")){
-  #   data$resource.name.html <- data$resource.name
-  # }
+   if(getShinyOption("map.set.lon") >= 100){
+    idx <- which(data$bbox.lon1 < 0 & data$bbox.lon2 < 0)
+    data[idx, ]$bbox.lon1 <- 180 + (180 + data[idx, ]$bbox.lon1)
+    idx <- which(data$bbox.lon2 < 0)
+    data[idx, ]$bbox.lon2 <- 180 + (180 + data[idx, ]$bbox.lon2)
+    data[which(data$lon < 0), ]$lon <- 180 + (180 + data[which(data$lon < 0), ]$lon)
+   }
   
   ## popup ----
   if(! any(colnames(data) == "popup")){
@@ -130,10 +132,18 @@ app_server <- function(input, output, session) {
     surfaces <- surfaces[order(surfaces$area, decreasing = TRUE),  ]
   }
   
+  ## rectangle selection control ---- 
+  rectangle.selection <- reactiveValues(val = NULL)
+  
+  observeEvent(input$map_draw_new_feature, {
+    rectangle.selection$val <- input$map_draw_new_feature
+  })
+  
   # Table output ----
-  tab <- eventReactive(input$map_draw_new_feature,{
-    if(! is.null(input$map_draw_new_feature)){  ## rectangle selection----
-      
+    tab <- eventReactive(rectangle.selection$val, {
+    data.sub <- data[, - which(names(data) %in% c("lat", "lon", "bbox.lon1", "bbox.lat1", "bbox.lon2", "bbox.lat2", "color", "fillColor", "fillOpacity", "area", "popup") )]
+    
+    if( ! is.null(rectangle.selection$val)){  ## rectangle selection----
       lon <- c(input$map_draw_new_feature$geometry$coordinates[[1]][[1]][[1]],
                input$map_draw_new_feature$geometry$coordinates[[1]][[2]][[1]],
                input$map_draw_new_feature$geometry$coordinates[[1]][[3]][[1]],
@@ -150,25 +160,27 @@ app_server <- function(input, output, session) {
       max.lat <- max(lat) + 90
       
       # selected points:
-      idx.points <- (data$lon >= min.lon & data$lon <=  max.lon)    &    (data$lat >= min.lat & data$lat <=  max.lat)
+      idx.points <- (data$lon >= min.lon & data$lon <=  max.lon)    &    (data$lat + 90 >= min.lat & data$lat + 90 <=  max.lat)
       idx.points <- which(idx.points)
       
       # select surfaces:
       ## area with no horizontal overlap with the selected area: 
-      horiz.overlap <- (data$bbox.lon1 < min.lon &data$bbox.lon2 < min.lon) | 
-        (data$bbox.lon1 > max.lon &data$bbox.lon2 > max.lon)
+      horiz.overlap <- (data$bbox.lon1 < min.lon & data$bbox.lon2 < min.lon) | 
+        (data$bbox.lon1 > max.lon & data$bbox.lon2 > max.lon)
       ## area with no vertical overlap with the selected area: 
-      vert.overlap  <- (data$bbox.lat1 + 90 > max.lat &data$bbox.lat2 + 90 > max.lat) | 
-        (data$bbox.lat1 + 90 < min.lat &data$bbox.lat2 + 90 < min.lat)
+      vert.overlap  <- (data$bbox.lat1 + 90 > max.lat & data$bbox.lat2 + 90 > max.lat) | 
+        (data$bbox.lat1 + 90 < min.lat & data$bbox.lat2 + 90 < min.lat)
       
       idx.surf <- which( ! horiz.overlap & ! vert.overlap)
       # subset
-      data <-  data[c(idx.surf, idx.points), ]
+      data.sub <-  data.sub[c(idx.surf, idx.points), ]
     }
-    data[, - which(names(data) %in% c("lat", "lon", "bbox.lon1", "bbox.lat1", "bbox.lon2", "bbox.lat2", "color", "fillColor", "fillOpacity", "area", "popup") )]
-
-  }, ignoreInit = FALSE, ignoreNULL = FALSE)
+    
+    data.sub
+  }, ignoreNULL = FALSE, ignoreInit = FALSE)
   
+
+    
   output$table <- DT::renderDataTable({
     DT::datatable(tab(), rownames = FALSE,  escape = FALSE, selection = 'single',
                   filter =  getShinyOption("table.filter"),
@@ -192,7 +204,16 @@ app_server <- function(input, output, session) {
     }
   })
   
-  
+  # show area general control ----
+  show.areas <- reactive({
+    value <- FALSE
+    if(getShinyOption("map.show.areas") == "always"){ 
+      value <- TRUE
+    } else if(getShinyOption("map.show.areas") %in% c(TRUE, FALSE)){
+      value <- input$show.areas.box
+    }
+    value
+  })
   
   # Base map -----
   map.base <-
@@ -216,52 +237,60 @@ app_server <- function(input, output, session) {
                          opacity = 0.8) 
   }
   
-  observeEvent(input$reset.map, {
-    
-    output$map <- leaflet::renderLeaflet({ # Render map ----
+  # Convenient mapping functions ----
+  # function to add rectangle to represent data coverage:
+  add.areas.if.required <- function(map.data, areas.data, condition){
+    output <- map.data
+    if(condition){
+      output <- output |> leaflet::addRectangles(data = areas.data,
+                                           lng1 = ~bbox.lon1,
+                                           lat1 = ~bbox.lat1,
+                                           lng2 = ~bbox.lon2,
+                                           lat2 = ~bbox.lat2,
+                                           popup = ~popup,
+                                           color = "black",
+                                           opacity = 1,
+                                           fillColor = ~fillColor,
+                                           fillOpacity = ~fillOpacity,
+                                           weight = .5,
+                                           label = ~resource.name,
+                                           options = leaflet::pathOptions(clickable = TRUE, interactive = TRUE),
+                                           popupOptions = leaflet::popupOptions(closeOnClick = TRUE))
+    }
+    output
+  }
+ 
+  # function to add circle markers:
+  add.circles.markers <- function(map.data, circle.data){
+    map.data |>
+      leaflet::addCircleMarkers(data = circle.data, lng= ~lon, lat = ~lat,
+                              popup = ~popup,
+                              layerId = ~id,
+                              label = ~resource.name,
+                              color = ~color,
+                              radius = 6,
+                              fillOpacity = ~fillOpacity,
+                              opacity = 0.99,
+                              options = leaflet::pathOptions(clickable = TRUE, interactive = TRUE),
+                              popupOptions = leaflet::popupOptions(closeOnClick = TRUE),
+                              clusterOptions = leaflet::markerClusterOptions(spiderfyDistanceMultiplier = 1.5)
+                              )
+  }
+  
+  observeEvent(input$reset.selections, { # Reset map ----
+    output$map <- leaflet::renderLeaflet({ 
       
       map <- map.base 
+      rectangle.selection$val <- NULL # reset the selection to reset the table.
       
-      if(getShinyOption("map.show.areas") %in% c(TRUE, "always")){
-          map <- map |> 
-            leaflet::addRectangles(data = surfaces,                   ## add surfaces ----
-                                   lng1 = ~bbox.lon1,
-                                   lat1 = ~bbox.lat1,
-                                   lng2 = ~bbox.lon2,
-                                   lat2 = ~bbox.lat2,
-                                   popup = ~popup,
-                                   color = "black",
-                                   opacity = 1,
-                                   fillColor = ~fillColor,
-                                   fillOpacity = ~fillOpacity,
-                                   weight = .5, 
-                                   label = ~resource.name,
-                                   options = leaflet::pathOptions(clickable = TRUE, interactive = TRUE),
-                                   popupOptions = leaflet::popupOptions(closeOnClick = TRUE)) 
-      }
+      map <- add.areas.if.required("map.data" = map, "areas.data" = surfaces, "condition" = show.areas())
       
-      map |>
-        leaflet::addCircleMarkers(data = data[ ! is.na(data$lat), ],  ## add points ----
-                                  ~lon, ~lat,
-                                  popup = ~popup, layerId = ~id,
-                                  label = ~resource.name,
-                                  color = ~color,
-                                  radius = 6,
-                                  fillOpacity = ~fillOpacity,
-                                  opacity = 0.99,
-                                  options = leaflet::pathOptions(clickable = TRUE, interactive = TRUE),
-                                  popupOptions = leaflet::popupOptions(closeOnClick = TRUE),
-                                  clusterOptions = leaflet::markerClusterOptions(
-                                    spiderfyDistanceMultiplier = 1.5
-                                  )
-        ) |> 
-        leaflet.extras::addDrawToolbar(targetGroup = 'draw',             ## add draw tool ----
-                                       polylineOptions = FALSE, polygonOptions = FALSE, circleOptions = FALSE,
-                                       markerOptions = FALSE, circleMarkerOptions = FALSE, singleFeature = TRUE)
+      add.circles.markers(map, data[ ! is.na(data$lat), ])
     })
   }, ignoreInit = FALSE, ignoreNULL = FALSE)
   
   
+
   # Map update  ----
   ## row selection ----
   observeEvent(input$table_rows_selected, {
@@ -280,7 +309,7 @@ app_server <- function(input, output, session) {
         data[row, ]$fillOpacity <- 1 # selected point is plain filled
         target.lon <- data[row, ]$lon
         target.lat <- data[row, ]$lat
-        zoom.lvl <- getShinyOption("map.min.zoom") + 3
+        zoom.lvl <- getShinyOption("map.min.zoom") + 4
       } else if( ! is.null(data[row, ]$bbox.lon1))  {
         if( ! is.na(data[row, ]$bbox.lon1)){
           surfaces$fillOpacity <- getShinyOption("map.area.fill.opacity") # reset value
@@ -305,86 +334,20 @@ app_server <- function(input, output, session) {
         leaflet::setView(lng = target.lon, lat = target.lat, zoom = zoom.lvl)  
     }
     
-    if( getShinyOption("map.show.areas") == "always"){
-        map <- map |> leaflet::addRectangles(data = surfaces,
-                                              lng1 = ~bbox.lon1,
-                                              lat1 = ~bbox.lat1,
-                                              lng2 = ~bbox.lon2,
-                                              lat2 = ~bbox.lat2,
-                                              popup = ~popup,
-                                              color = "black",
-                                              opacity = 1,
-                                              fillColor = ~fillColor,
-                                              fillOpacity = ~fillOpacity,
-                                              weight = .5,
-                                              label = ~resource.name,
-                                              options = leaflet::pathOptions(clickable = TRUE, interactive = TRUE),
-                                              popupOptions = leaflet::popupOptions(closeOnClick = TRUE))
-    }
+    map <- add.areas.if.required("map.data" = map, "areas.data" = surfaces, "condition" = show.areas())
     
-    if( ! is.null(input$show.areas)){
-      if(input$show.areas){
-        map <- map |> leaflet::addRectangles(data = surfaces,
-                                              lng1 = ~bbox.lon1,
-                                              lat1 = ~bbox.lat1,
-                                              lng2 = ~bbox.lon2,
-                                              lat2 = ~bbox.lat2,
-                                              popup = ~popup,
-                                              color = "black",
-                                              opacity = 1,
-                                              fillColor = ~fillColor,
-                                              fillOpacity = ~fillOpacity,
-                                              weight = .5,
-                                              label = ~resource.name,
-                                              options = leaflet::pathOptions(clickable = TRUE, interactive = TRUE),
-                                              popupOptions = leaflet::popupOptions(closeOnClick = TRUE))
-      }
-    }
-    
-    map <- map |>
-      leaflet::addCircleMarkers(data = data, lng= ~lon, lat = ~lat,
-                       popup = ~popup,
-                       layerId = ~id,
-                       label = ~resource.name,
-                       color = ~color, radius = 6,
-                       fillOpacity = ~fillOpacity,
-                       clusterOptions = leaflet::markerClusterOptions(spiderfyDistanceMultiplier=1.5),
-                       opacity = 0.99
-      )     
+    add.circles.markers(map, data[ ! is.na(data$lat), ])
   })
   
-  
   ## show areas ----
-  observeEvent(input$show.areas, {
+  observeEvent(input$show.areas.box, {
+    
     map <- leafletProxy("map")  |> 
       leaflet::clearShapes()             
     
-      if(input$show.areas){
-        map <- map |> leaflet::addRectangles(data = surfaces,
-                                              lng1 = ~bbox.lon1,
-                                              lat1 = ~bbox.lat1,
-                                              lng2 = ~bbox.lon2,
-                                              lat2 = ~bbox.lat2,
-                                              popup = ~popup,
-                                              color = "black",
-                                              opacity = 1,
-                                              fillColor = ~fillColor,
-                                              fillOpacity = ~fillOpacity,
-                                              weight = .5,
-                                              label = ~resource.name,
-                                              options = leaflet::pathOptions(clickable = TRUE, interactive = TRUE),
-                                              popupOptions = leaflet::popupOptions(closeOnClick = TRUE))
-      }
-    map <- map |>
-      leaflet::addCircleMarkers(data = data, lng= ~lon, lat = ~lat,
-                                popup = ~popup,
-                                layerId = ~id,
-                                label = ~resource.name,
-                                color = ~color, radius = 6,
-                                fillOpacity = ~fillOpacity,
-                                clusterOptions = leaflet::markerClusterOptions(spiderfyDistanceMultiplier=1.5),
-                                opacity = 0.99
-      )     
+    map <- add.areas.if.required("map.data" = map, "areas.data" = surfaces, "condition" = show.areas())
+    
+    add.circles.markers(map, data[ ! is.na(data$lat), ])
   })
 } # end of server.R
 
