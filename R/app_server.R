@@ -36,8 +36,9 @@ app_server <- function(input, output, session) {
                                     column(4, uiOutput("show.areas")),
                                   ),
                                   fluidRow(
-                                    column(7, 
-                                           "Click on a row to zoom the map on the corresponding item.",
+                                    column(8, 
+                                           HTML("<b>Map to Table</b>: Draw a rectangle to display the datasets related to the selected area in the table.<br>
+                                                <b>Table to Map</b>: Click on a row to zoom the map on the corresponding item."),
                                             br(),
                                             HTML(getShinyOption("text.bottom"))
                                     ))
@@ -99,8 +100,8 @@ app_server <- function(input, output, session) {
   
   if(length(getShinyOption("map.legend.labels")) > 0){
     data$color <- eval(parse(text = paste0(
-      "as.character(factor(data$",  getShinyOption("map.legend.variable"), 
-      ", levels = c(",  paste0("'", getShinyOption("map.legend.labels"), "'", collapse = ", "),
+      "as.character(factor(data$'",  getShinyOption("map.legend.variable"), 
+      "', levels = c(",  paste0("'", getShinyOption("map.legend.labels"), "'", collapse = ", "),
       "), labels = c(",  paste0("'", getShinyOption("map.legend.colors"), "'", collapse = ", "), ")))"
     )))
   }

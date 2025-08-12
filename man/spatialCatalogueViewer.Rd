@@ -37,7 +37,7 @@ spatialCatalogueViewer(data = NULL,
   \item{map.show.areas}{character or logical. One of TRUE, FALSE, 'always', 'never'. If TRUE or FALSE, a checkbox is displayed under the map.}
   \item{map.min.zoom}{integer. Minimal zoom for the map, between 1 and 12.}
   \item{table.hide.columns}{chatacter. Name(s) of the column(s) to hide in the interactive table. Note that these columns can be searched using the 'Search' form anyways.}
-  \item{table.filter}{character. Whether and where to use column filters: 'none': no filters, 'bottom' / 'top': put column filters at the bottom/top of the table.}
+  \item{table.filter}{character. Whether and where to use column filters: 'none': no filters, 'bottom' / 'top': put column filters at the bottom or top of the table.}
   \item{table.pageLength}{integer. Number of rows displayed on each page of the table.}
   \item{data.download.button}{logical. Dispay or not a button to download the dataset.}
   \item{tabs.contents}{character. A named list with the contents of the optional additional tabs. List elements' names are used as tab labels.}
