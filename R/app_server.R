@@ -206,12 +206,13 @@ app_server <- function(input, output, session) {
   
   # show area  control ----
   show.areas <- reactive({
-    req(input$show.areas.box)
     value <- FALSE
     if(getShinyOption("map.show.areas") == "always"){ 
       value <- TRUE
     } else if(getShinyOption("map.show.areas") %in% c(TRUE, FALSE)){
-      value <- input$show.areas.box
+      if( ! is.null(input$show.areas.box)){
+        value <- input$show.areas.box
+      }
     }
     value
   })
@@ -349,6 +350,6 @@ app_server <- function(input, output, session) {
     map <- add.areas.if.required("map.data" = map, "areas.data" = surfaces, "condition" = show.areas())
     
     add.circles.markers(map, data[ ! is.na(data$lat), ])
-  })
+  }, ignoreInit = FALSE, ignoreNULL = FALSE)
 } # end of server.R
 
