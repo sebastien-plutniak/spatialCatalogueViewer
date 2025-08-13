@@ -204,8 +204,9 @@ app_server <- function(input, output, session) {
     }
   })
   
-  # show area general control ----
+  # show area  control ----
   show.areas <- reactive({
+    req(input$show.areas.box)
     value <- FALSE
     if(getShinyOption("map.show.areas") == "always"){ 
       value <- TRUE
