@@ -1,7 +1,8 @@
 # History files
+.gitignore
 .Rhistory
 .Rapp.history
-
+TODO
 # Session Data files
 .RData
 .RDataTmp

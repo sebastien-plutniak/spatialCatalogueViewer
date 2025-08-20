@@ -41,7 +41,7 @@ app_server <- function(input, output, session) {
                                   ),
                                   fluidRow(
                                     column(8, 
-                                           HTML("<b>Map to Table</b>: Draw a rectangle to display the datasets related to the selected area in the table.<br>
+                                           HTML("<b>Map to Table</b>: Draw a rectangle to filter the table with the datasets related to the selected area.<br>
                                                 <b>Table to Map</b>: Click on a row to zoom the map on the corresponding item."),
                                             br(),
                                             HTML(getShinyOption("text.bottom"))
@@ -231,11 +231,21 @@ app_server <- function(input, output, session) {
                                    singleFeature = TRUE)  
   
   if(length(getShinyOption("map.legend.labels") > 0)){
+    labels.1 <- getShinyOption("map.legend.labels")
+    labels.2 <- table(eval(parse(text = paste0("data$", getShinyOption("map.legend.variable")))))
+    
+    if(sum(! labels.1 %in% names(labels.2)) > 0) {
+      warning(paste0("Some 'map.legend.labels' values are absent in the '", getShinyOption("map.legend.variable"), "' variable."))
+    }
+    
+    labels.2 <- labels.2[labels.1]
+    legend.labels <- sapply(seq_len(length(labels.1)), function(x)   paste0(labels.1[x], " (", labels.2[x], ")" ))
+    
     map.base <- map.base |>
       leaflet::addLegend("bottomright",    ## legend ----
                          title = getShinyOption("map.legend.variable"),
                          colors = getShinyOption("map.legend.colors"),
-                         labels = getShinyOption("map.legend.labels"),
+                         labels = legend.labels,
                          opacity = 0.8) 
   }
   
