@@ -232,7 +232,7 @@ app_server <- function(input, output, session) {
   
   if(length(getShinyOption("map.legend.labels") > 0)){
     labels.1 <- getShinyOption("map.legend.labels")
-    labels.2 <- table(eval(parse(text = paste0("data$", getShinyOption("map.legend.variable")))))
+    labels.2 <- table(eval(parse(text = paste0("data$'", getShinyOption("map.legend.variable"), "'"))))
     
     if(sum(! labels.1 %in% names(labels.2)) > 0) {
       warning(paste0("Some 'map.legend.labels' values are absent in the '", getShinyOption("map.legend.variable"), "' variable."))
