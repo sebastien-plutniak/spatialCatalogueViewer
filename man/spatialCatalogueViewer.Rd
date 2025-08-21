@@ -71,14 +71,14 @@ Optional:
 }
 
 \examples{
-    \dontrun{
-    # running the app with no particular data and settings:
+    if(interactive()){
     df <- data.frame(lat = c(43.6033, 49.89441, 43.2974),
                      lon = c(1.4444,  2.29649, 5.3703),
                      resource.name = c("Toulouse", "Amiens", "Marseille"),
                      population = c(511684, 135429,  877215),
                      region = c("Occitanie", "Picardie", "Provence")
     )
+    # launch the app:
     spatialCatalogueViewer(data = df,
                    map.set.lon = 2.37,  map.set.lat =  47.29, map.min.zoom = 5)
     }
