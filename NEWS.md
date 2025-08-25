@@ -1,5 +1,9 @@
+# spatialCatalogueViewer 0.1.3
+
+* Display a message while the app is charging.
+
+
 # spatialCatalogueViewer 0.1.2
-Released: 2025-08-
 
 * Add count in the legend.
 

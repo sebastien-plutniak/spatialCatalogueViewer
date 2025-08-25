@@ -3,8 +3,20 @@ app_ui <- function(){
   
   ui <- shinyUI(  
     fluidPage(
+      tags$head(
+        tags$style(
+          HTML(".shiny-notification {
+                   position:fixed;
+                   top: calc(50%);
+                   left: calc(50%);
+             }
+             "
+          )
+        )),
       theme = shinythemes::shinytheme(getShinyOption("theme")),
-      HTML(getShinyOption("text.title")),
+      HTML(
+        getShinyOption("text.title"),
+      ),
       uiOutput("tab.contents")
     ) 
   )
