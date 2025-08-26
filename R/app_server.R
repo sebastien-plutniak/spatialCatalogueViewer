@@ -1,6 +1,6 @@
 app_server <- function(input, output, session) {
   
-  showNotification(HTML("<b>Loading... please wait.</b>"), id = "waiting.msg", duration = NULL, type = "message")
+  showNotification(HTML("<b>Loading... please wait.</b>"), id = "waiting.msg", duration = NULL, type = "message") # see 'removeNotification' below
   
   # UI: credit ----
   output$credit <- renderUI({

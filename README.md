@@ -8,6 +8,8 @@ An R 'Shiny' application to seamlessly create interactive online catalogues for 
 [![R-CMD-check](https://github.com/sebastien-plutniak/spatialCatalogueViewer/actions/workflows/r.yml/badge.svg)](https://github.com/sebastien-plutniak/spatialCatalogueViewer/actions/workflows/r.yml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16809720.svg)](https://doi.org/10.5281/zenodo.16809720)
 [![SWH](https://archive.softwareheritage.org/badge/origin/https://github.com/sebastien-plutniak/spatialCatalogueViewer/)](https://archive.softwareheritage.org/browse/origin/?origin_url=https://github.com/sebastien-plutniak/spatialCatalogueViewer)
+[![CRAN status](https://www.r-pkg.org/badges/version/spatialCatalogueViewer)](https://CRAN.R-project.org/package=spatialCatalogueViewer)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/spatialCatalogueViewer?color=brightgreen&.svg)](https://cran.r-project.org/package=spatialCatalogueViewer)
 [![r-universe](https://sebastien-plutniak.r-universe.dev/badges/spatialCatalogueViewer)](https://sebastien-plutniak.r-universe.dev/ui#package:spatialCatalogueViewer)
 [![license](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.r-project.org/Licenses/GPL-3)
 
@@ -23,7 +25,7 @@ An R 'Shiny' application to seamlessly create interactive online catalogues for 
 
 # Installation
 
-The package can be installed from CRAN with:
+The package can be installed from the CRAN with:
 
 ```r
 install.packages("spatialCatalogueViewer")
