@@ -48,6 +48,18 @@ remotes::install_github("sebastien-plutniak/spatialCatalogueViewer")
 *  [open-archeOcsean](https://analytics.huma-num.fr/Sebastien.Plutniak/open-archeocsean): a catalogue of open-source datasets for the Pacific and Southeast Asia archaeology  [see R code](https://github.com/sebastien-plutniak/open-archeocsean).
 
 
+# Deployment 
+
+To deploy `spatialCatalogueViewer` on a Shiny Server:
+
+* download the latest version of the package at https://github.com/sebastien-plutniak/spatialcatalogueviewer/archive/master.zip
+* edit the [app.R](https://github.com/sebastien-plutniak/spatialCatalogueViewer/blob/main/app.R) file to your needs. For examples, see:
+    * *archeoViz Portal* [app.R file](https://github.com/sebastien-plutniak/archeoviz-portal-app/blob/main/app.R)
+    * *Open-archeOcsean* [app.R file](https://github.com/sebastien-plutniak/open-archeocsean/blob/main/app.R)
+* Upload the entire folder into shiny server's relevent application directory.
+
+
+
 
 # Community guidelines
 
@@ -57,6 +69,6 @@ If you find a bug, please fill an [issue](https://github.com/sebastien-plutniak/
 
 ## Suggesting changes
 
-Suggestions of changes to `archeofrag.gui` are very welcome. These requests may concern additional functions, changes to documentation, additional examples, new features, etc. 
+Suggestions of changes to `spatialCatalogueViewer` are very welcome. These requests may concern additional functions, changes to documentation, additional examples, new features, etc. 
 They can be made by filling an [issue](https://github.com/sebastien-plutniak/spatialCatalogueViewer/issues) and, even better, using pull requests and the [GitHub Fork and Pull
 model](https://help.github.com/articles/about-pull-requests).
