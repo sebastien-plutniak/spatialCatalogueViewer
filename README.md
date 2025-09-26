@@ -44,8 +44,8 @@ remotes::install_github("sebastien-plutniak/spatialCatalogueViewer")
 
 `spatialCatalogueViewer` is used by:
 
-*  [archeoViz Portal](https://analytics.huma-num.fr/archeoviz/home): a catalogue of archaeological datasets exposed with the `archeoViz` application [see R code](https://github.com/sebastien-plutniak/archeoviz-portal).
-*  [open-archeOcsean](https://analytics.huma-num.fr/Sebastien.Plutniak/open-archeocsean): a catalogue of open-source datasets for the Pacific and Southeast Asia archaeology  [see R code](https://github.com/sebastien-plutniak/open-archeocsean).
+*  [*archeoViz Portal*](https://analytics.huma-num.fr/archeoviz/home): a catalogue of archaeological datasets displayed with the `archeoViz` application [see R code](https://github.com/sebastien-plutniak/archeoviz-portal).
+*  [*open-archeOcsean*](https://analytics.huma-num.fr/Sebastien.Plutniak/open-archeocsean): a catalogue of open-source datasets for the Pacific and Southeast Asia archaeology  [see R code](https://github.com/sebastien-plutniak/open-archeocsean).
 
 
 # Deployment 
@@ -56,7 +56,7 @@ To deploy `spatialCatalogueViewer` on a Shiny Server:
 * edit the [app.R](https://github.com/sebastien-plutniak/spatialCatalogueViewer/blob/main/app.R) file to your needs. For examples, see:
     * *archeoViz Portal* [app.R file](https://github.com/sebastien-plutniak/archeoviz-portal-app/blob/main/app.R)
     * *Open-archeOcsean* [app.R file](https://github.com/sebastien-plutniak/open-archeocsean/blob/main/app.R)
-* Upload the entire folder into shiny server's relevent application directory.
+* Upload the entire folder into the directory of your shiny server where applications live.
 
 
 

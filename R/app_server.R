@@ -4,7 +4,7 @@ app_server <- function(input, output, session) {
   
   # UI: credit ----
   output$credit <- renderUI({
-    txt <- paste("Powered by <a href=github.com/sebastien-plutniak/spatialCatalogueViewer target=_blank>spatialCatalogueViewer</a> v",
+    txt <- paste("Powered by <a href=https://github.com/sebastien-plutniak/spatialCatalogueViewer target=_blank>spatialCatalogueViewer</a> v",
                              utils::packageVersion("spatialCatalogueViewer"), sep="")
     div(HTML(txt))
   })
