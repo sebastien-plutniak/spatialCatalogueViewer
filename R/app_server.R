@@ -338,8 +338,8 @@ app_server <- function(input, output, session) {
           surfaces[idx, ]$fillColor <- surfaces[idx, ]$color 
           surfaces <- rbind(surfaces[-idx, ], surfaces[idx, ]) 
           surfaces$id <- seq_len(nrow(surfaces))
-        }
-      }
+        } else {return()}
+      } 
       map <- map                  |> 
         leaflet::clearMarkers()            |>
         leaflet::clearMarkerClusters()     |>
