@@ -1,3 +1,8 @@
+
+# spatialCatalogueViewer 0.1.4
+
+* Area display is disable when no bounding box coordinates are given (bbox.lat1, etc.)
+
 # spatialCatalogueViewer 0.1.3
 Released: 2025-08-27
 

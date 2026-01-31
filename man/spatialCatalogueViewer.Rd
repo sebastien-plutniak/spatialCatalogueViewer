@@ -53,12 +53,15 @@ The dataframe for \code{data} has mandatory and optional columns:
 
 Mandatory:
 
-\item{resource.name}{Name of the resource (HTML contents is possible)}.
-\item[{coordinates}{Either 'lon' and 'lat' columns or 4 columns named 'bbox.lon1', 'bbox.lat1', 'bbox.lon2', 'bbox.lat2'  (where lon1 and lat1 refers to the north-west corner of the area and lon2 and lat2 to the south-east corner).}
-
+\itemize{
+  \item resource.name: Name of the resource (HTML contents is possible).
+  \item coordinates: Either 'lon' and 'lat' columns or 4 columns named 'bbox.lon1', 'bbox.lat1', 'bbox.lon2', 'bbox.lat2'  (where lon1 and lat1 refers to the north-west corner of the area and lon2 and lat2 to the south-east corner).
+}
 Optional:
 
-\item{resource.popup}{HTML contents for the map pop-up.}
+\itemize{
+  \item resource.popup: HTML contents for the map pop-up.
+}
 
 }
 \value{
