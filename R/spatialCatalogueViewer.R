@@ -14,10 +14,14 @@ spatialCatalogueViewer <- function(data = NULL,
   # tests parameters----
   if(is.null(data)) stop("No data provided.")
   if( ! is.data.frame(data)) stop("'data' must be a dataframe.")
-  if(! (sum(c("lon", "lat") %in% colnames(data)) | sum(! c("bbox.lon1", "bbox.lat1", "bbox.lon2", "bboxlat2") %in% colnames(data)))) {
-    stop("'data' must have either 'lon' and 'lat' columns or 'bbox.lon1', 'bbox.lat1', 'bbox.lon2', and 'bboxlat2' columns.")
+  if(! (sum(c("lon", "lat") %in% colnames(data)) | sum(! c("bbox.lon1", "bbox.lat1", "bbox.lon2", "bbox.lat2") %in% colnames(data)))) {
+    stop("'data' must have either 'lon' and 'lat' columns or 'bbox.lon1', 'bbox.lat1', 'bbox.lon2', and 'bbox.lat2' columns.")
   }
   if(length(map.legend.labels) != length(map.legend.colors)) stop("'map.legend.labels' and 'map.legend.colors' must have equal lengths.")
+  
+  # disable areas if no data:
+  bbox.count <- apply(data[, c("bbox.lon1", "bbox.lat1", "bbox.lon2", "bbox.lat2")], 1, function(x) sum(x %in% c("", NA))  )
+  if( ! any(bbox.count < 4)) {  map.show.areas <- "never" }
   
   # define shiny options ----
   shiny::shinyOptions("data" = data,
