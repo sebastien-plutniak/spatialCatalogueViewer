@@ -45,7 +45,8 @@ remotes::install_github("sebastien-plutniak/spatialCatalogueViewer")
 `spatialCatalogueViewer` is used by:
 
 *  [*archeoViz Portal*](https://analytics.huma-num.fr/archeoviz/home): a catalogue of archaeological datasets displayed with the `archeoViz` application [see R code](https://github.com/sebastien-plutniak/archeoviz-portal).
-*  [*open-archeOcsean*](https://analytics.huma-num.fr/Sebastien.Plutniak/open-archeocsean): a catalogue of open-source datasets for the Pacific and Southeast Asia archaeology  [see R code](https://github.com/sebastien-plutniak/open-archeocsean).
+*  [*open-archeOcsean*](https://analytics.huma-num.fr/open-archeocsean/): a catalogue of open-source resources for the Pacific and Southeast Asia archaeology  [see R code](https://github.com/sebastien-plutniak/open-archeocsean).
+*  [*open-lingOcsean*](https://analytics.huma-num.fr/Sebastien.Plutniak/open-lingocsean): a catalogue of language data collected in the course of the OCSEAN. Oceanic and Southeast Asian Navigators project.   [see R code](https://github.com/sebastien-plutniak/open-lingocsean).
 
 
 # Deployment 
@@ -72,3 +73,9 @@ If you find a bug, please fill an [issue](https://github.com/sebastien-plutniak/
 Suggestions of changes to `spatialCatalogueViewer` are very welcome. These requests may concern additional functions, changes to documentation, additional examples, new features, etc. 
 They can be made by filling an [issue](https://github.com/sebastien-plutniak/spatialCatalogueViewer/issues) and, even better, using pull requests and the [GitHub Fork and Pull
 model](https://help.github.com/articles/about-pull-requests).
+
+
+
+# References
+s
+* Plutniak S. 2026. 'Référencer les ressources ouvertes en archéologie : logiciels, interfaces et infrastructures, potentiels et limites'. *ACQuA 2026. Approches computationnelles et quantitatives en archéologie*, poster, 9-10 February 2026, Tours, France.  [hal-05511180](https://hal.science/hal-05511180)

@@ -12,16 +12,29 @@ spatialCatalogueViewer <- function(data = NULL,
   
   
   # tests parameters----
+  
   if(is.null(data)) stop("No data provided.")
   if( ! is.data.frame(data)) stop("'data' must be a dataframe.")
   if(! (sum(c("lon", "lat") %in% colnames(data)) | sum(! c("bbox.lon1", "bbox.lat1", "bbox.lon2", "bbox.lat2") %in% colnames(data)))) {
     stop("'data' must have either 'lon' and 'lat' columns or 'bbox.lon1', 'bbox.lat1', 'bbox.lon2', and 'bbox.lat2' columns.")
   }
-  if(length(map.legend.labels) != length(map.legend.colors)) stop("'map.legend.labels' and 'map.legend.colors' must have equal lengths.")
   
   # disable areas if no data:
-  bbox.count <- apply(data[, c("bbox.lon1", "bbox.lat1", "bbox.lon2", "bbox.lat2")], 1, function(x) sum(x %in% c("", NA))  )
-  if( ! any(bbox.count < 4)) {  map.show.areas <- "never" }
+  if(sum(c("bbox.lon1", "bbox.lat1", "bbox.lon2", "bbox.lat2") %in% colnames(data)) == 4){
+    if(sum(complete.cases(data[, c("bbox.lon1", "bbox.lat1", "bbox.lon2", "bbox.lat2")])) == 0){
+      map.show.areas <- "never"
+    }
+  } else {
+    map.show.areas <- "never"
+  }
+  
+  ## legend variables ----
+  cond <- ! sum(is.null(data$map.legend.variable),
+                is.null(data$map.legend.labels),
+                is.null(data$map.legend.colors)) %in% c(0, 3)
+  if(cond) stop("The parameters 'map.legend.variable', 'map.legend.labels', and 'map.legend.colors' must be (not) used together.")
+  
+  if(length(map.legend.labels) != length(map.legend.colors)) stop("'map.legend.labels' and 'map.legend.colors' must have equal lengths.")
   
   # define shiny options ----
   shiny::shinyOptions("data" = data,

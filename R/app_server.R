@@ -83,7 +83,7 @@ app_server <- function(input, output, session) {
   data <- getShinyOption("data")
   data$id <- seq_len(nrow(data))
   
-  ## convert longitudes in the map is centered ----
+  ## convert longitudes if the map is centered ----
   
    if(getShinyOption("map.set.lon") >= 100){
     idx <- which(data$bbox.lon1 < 0 & data$bbox.lon2 < 0)
@@ -275,6 +275,9 @@ app_server <- function(input, output, session) {
  
   # function to add circle markers:
   add.circles.markers <- function(map.data, circle.data){
+    
+    if(sum(complete.cases(circle.data[, c("lon","lat")])) == 0) return(map.data)
+    
     map.data |>
       leaflet::addCircleMarkers(data = circle.data, lng= ~lon, lat = ~lat,
                               popup = ~popup,
