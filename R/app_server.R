@@ -42,8 +42,8 @@ app_server <- function(input, output, session) {
                                   ),
                                   fluidRow(
                                     column(8, 
-                                           HTML("<b>Map to Table</b>: Draw a rectangle to filter the table with the datasets related to the selected area.<br>
-                                                <b>Table to Map</b>: Click on a row to zoom the map on the corresponding item."),
+                                           # <b>Map to Table</b>: Draw a rectangle to filter the table with the datasets related to the selected area.<br>
+                                           HTML("<b>Table to Map</b>: Click on a row to zoom the map on the corresponding item."),
                                             br(),
                                             HTML(getShinyOption("text.bottom"))
                                     ))
@@ -225,11 +225,12 @@ app_server <- function(input, output, session) {
                      lat = getShinyOption("map.set.lat"),
                      zoom = getShinyOption("map.min.zoom"))  |>
     leaflet::addProviderTiles(getShinyOption("map.provider"),
-                              options = leaflet::providerTileOptions(minZoom = getShinyOption("map.min.zoom"))) |>
-    leaflet.extras::addDrawToolbar(targetGroup = 'draw', 
-                                   polylineOptions = FALSE, polygonOptions = FALSE, circleOptions = FALSE,
-                                   markerOptions = FALSE, circleMarkerOptions = FALSE, 
-                                   singleFeature = TRUE)  
+                              options = leaflet::providerTileOptions(minZoom = getShinyOption("map.min.zoom"))) # |>
+    # leaflet.extras::addDrawToolbar(targetGroup = 'draw', 
+    #                                polylineOptions = FALSE, polygonOptions = FALSE, circleOptions = FALSE,
+    #                                markerOptions = FALSE, circleMarkerOptions = FALSE, 
+    #                                singleFeature = TRUE) 
+  # commented since leaflet.extras has been removed from the CRAN (Feb. 2026)
   
   if(length(getShinyOption("map.legend.labels") > 0)){
     labels.1 <- getShinyOption("map.legend.labels")
@@ -276,7 +277,7 @@ app_server <- function(input, output, session) {
   # function to add circle markers:
   add.circles.markers <- function(map.data, circle.data){
     
-    if(sum(complete.cases(circle.data[, c("lon","lat")])) == 0) return(map.data)
+    if(sum(stats::complete.cases(circle.data[, c("lon","lat")])) == 0) return(map.data)
     
     map.data |>
       leaflet::addCircleMarkers(data = circle.data, lng= ~lon, lat = ~lat,

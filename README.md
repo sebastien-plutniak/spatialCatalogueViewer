@@ -47,7 +47,7 @@ remotes::install_github("sebastien-plutniak/spatialCatalogueViewer")
 
 *  [*archeoViz Portal*](https://analytics.huma-num.fr/archeoviz/home): a catalogue of archaeological datasets displayed with the `archeoViz` application. [Source code](https://github.com/sebastien-plutniak/archeoviz-portal).
 *  [*open-archeOcsean*](https://analytics.huma-num.fr/open-archeocsean/): a catalogue of open-source resources for the Pacific and Southeast Asia archaeology.  [Source code](https://github.com/sebastien-plutniak/open-archeocsean).
-*  [*open-lingOcsean*](https://analytics.huma-num.fr/Sebastien.Plutniak/open-lingocsean): a catalogue of language data collected in the course of the OCSEAN. Oceanic and Southeast Asian Navigators project. [Source code](https://github.com/sebastien-plutniak/open-lingocsean).
+*  [*open-lingOcsean*](https://analytics.huma-num.fr/open-lingocsean/): a catalogue of language data collected in the course of the OCSEAN. Oceanic and Southeast Asian Navigators project. [Source code](https://github.com/sebastien-plutniak/open-lingocsean).
 
 
 # Deployment 
