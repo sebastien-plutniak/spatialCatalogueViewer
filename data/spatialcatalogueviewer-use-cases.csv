@@ -1,0 +1,4 @@
+"id","resource.name","description","lon","lat","bbox.lon1","bbox.lat1","bbox.lon2","bbox.lat2","resource.url","resource.domains","publication","n.items"
+1,"archeoViz Portal","Catalogue of ‘archeoViz’ instances applied to spatial archaeological data",,,-151.7835,68.136,144.8596444,-33.183,"https://analytics.huma-num.fr/archeoviz/home/","archaeology",2023,78
+2,"Open-archeOcsean","Catalogue of open resources for the archaeology of South Asia, Southeast Asia, and Pacific archaeology",,,91,46,251,-53,"https://analytics.huma-num.fr/open-archeocsean/","archaeology, geology, paleoenvironment, ethnology",2025,84
+3,"Open-lingOcsean","Catalogue of linguistics datasets generated in the OCSEAN projet",,,114.625416666667,20.7556,139.7345,-10.88403,"https://analytics.huma-num.fr/Sebastien.Plutniak/open-lingocsean/","linguistics",2026,50
