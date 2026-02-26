@@ -8,3 +8,5 @@ README.md
 ^doc$
 ^Meta$
 TODO
+data/spatialcatalogueviewer-use-cases
+app-demo.R
