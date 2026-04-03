@@ -1,3 +1,8 @@
+# spatialCatalogueViewer 0.2.1
+Released: 2026-02-26
+
+* Reintegrate area selection feature.
+
 # spatialCatalogueViewer 0.2.0
 Released: 2026-02-26
 
