@@ -50,14 +50,15 @@ df <- data.frame(
         lat = c(41.8926, 41.3843, 43.6038))
 spatialCatalogueViewer(df) </pre></small>
                 <p/>
-                
-                <h2>Package Citation</h2> 
-                  Plutniak, Sébastien. 2025. “spatialCatalogueViewer: A ‘Shiny’ Tool to Create Interactive Catalogues for Geospatial Data”,
+                <h2>References</h2> 
+                <h3>Package Citation</h3> 
+                  Plutniak, S. 2025. “spatialCatalogueViewer: A ‘Shiny’ Tool to Create Interactive Catalogues for Geospatial Data”,
                 <ul>
-                  <li><i>Zenodo</i>, doi: <a href=https://doi.org/10.5281/zenodo.16955657 target=_blank>10.5281/zenodo.16955657</a>.</li>
+                  <li><i>Zenodo</i>, doi: <a href=https://doi.org/10.5281/zenodo.16809720 target=_blank>10.5281/zenodo.16809720</a>.</li>
                   <li><i>CRAN</i>, doi: <a href=https://doi.org/10.32614/CRAN.package.spatialCatalogueViewer target=_blank>10.32614/CRAN.package.spatialCatalogueViewer</a>.</li>
                   </ul>
-                
+                <h3>Documentation</h3>
+                Plutniak, S. 2026. “Référencer les ressources ouvertes en archéologie : logiciels, interfaces et infrastructures, potentiels et limites”. Conference Poster. <i>ACQuA 2026. Approches computationnelles et quantitatives en archéologie</i>.  <a href=https://hal.science/hal-05511180v1 target=_blank>hal-05511180v1</a>.
                </div>"
 
 
